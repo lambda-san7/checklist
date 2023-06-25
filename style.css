@@ -1,0 +1,97 @@
+html {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+div {
+    background-color: rgb(29, 29, 29);
+    color: white;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.bar {
+    background-color: rgb(29, 29, 29);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.input {
+    background-color: rgb(29, 29, 29);
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 250px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.editable {
+    background-color: rgba(29, 29, 29, 0);
+    border: 0px solid white;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.checkbox {
+    -webkit-appearance: none;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: rgb(29, 29, 29);
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.checkbox:checked {
+    -webkit-appearance: none;
+    background-color: rgb(0, 255, 89);
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+    background-color: rgb(29, 29, 29);
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#tasks {
+    height: 80%;
+    width: 45%;
+    float: left;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#done {
+    height: 80%;
+    width: 45%;
+    float: right;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    padding: 0px;
+}
