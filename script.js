@@ -112,7 +112,13 @@ for(let i = 0; i < tasks_arr.length; i++){
 }
 
 var clear_all = function(){
-    for(let i = 0; i < task_obj_stack.length; i++){
-        task_obj_stack[i].del.onclick()
+    switch(confirm("are you sure you want to delete all tasks?")){
+        case true:
+            for(let i = 0; i < task_obj_stack.length; i++){
+                task_obj_stack[i].del.onclick()
+            }
+        default:
+            console.log("cancelled delete all")
     }
+    
 }
