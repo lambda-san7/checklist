@@ -103,6 +103,8 @@ h1 {
     -webkit-appearance: none;
     display: inline-block;
     vertical-align: middle;
+    text-align: center;
+    line-height: 10px;
     background-color: rgb(255, 57, 57);
     border: 1px solid white;
     color: white;

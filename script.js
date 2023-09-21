@@ -76,6 +76,7 @@ class task{
 
         this.del = document.createElement("button")
         this.del.classList.add("delete")
+        this.del.innerHTML = "X"
         this.del.onclick = () => {
             document.getElementById(this.box).removeChild(this.check);
             document.getElementById(this.box).removeChild(this.del);
