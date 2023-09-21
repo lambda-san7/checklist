@@ -1,5 +1,5 @@
 const input = document.getElementById("input")
-const tasks = document.getElementById("tasks")
+const tasks = document.getElementById("do")
 const done = document.getElementById("done")
 
 id_tick = 1
@@ -11,13 +11,12 @@ if(tasks_arr == null){
 
 var new_task = function(name,box){
     new task(name,box)
-        tasks_arr.push(
-            {
-                task_name: name,
-                task_box: box,
-            }
-        )
-
+    tasks_arr.push(
+        {
+            task_name: name,
+            task_box: box,
+        }
+    )
     var JSON_arr = JSON.stringify(tasks_arr);
     localStorage.setItem("tasks", JSON_arr);
 }
@@ -37,6 +36,12 @@ class task{
                 done.appendChild(this.txt)
                 done.appendChild(this.br)
                 this.box = "done"
+                for(let i = 0; i < tasks_arr.length; i++){
+                    if(tasks_arr[i].task_name == this.name){
+                        tasks_arr[i].task_box = "done"
+                        
+                    }
+                }
                 return
             }
             if(this.box == "done"){
@@ -44,8 +49,15 @@ class task{
                 tasks.appendChild(this.txt)
                 tasks.appendChild(this.br)
                 this.box = "do"
+                for(let i = 0; i < tasks_arr.length; i++){
+                    if(tasks_arr[i].task_name == this.name){
+                        tasks_arr[i].task_box = "do"
+                    }
+                }
                 return
             }
+            var JSON_arr = JSON.stringify(tasks_arr);
+            localStorage.setItem("tasks", JSON_arr);
         }
 
         this.txt = document.createElement("input")
@@ -56,9 +68,9 @@ class task{
         this.br = document.createElement("br")
         this.br.id = this.id
             
-        tasks.appendChild(this.check);
-        tasks.appendChild(this.txt);
-        tasks.appendChild(this.br);
+        document.getElementById().appendChild(this.check);
+        document.getElementById().appendChild(this.txt);
+        document.getElementById().appendChild(this.br);
 
         id_tick += 1
         input.value = ""
