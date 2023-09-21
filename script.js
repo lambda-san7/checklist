@@ -5,6 +5,7 @@ const done = document.getElementById("done")
 id_tick = 1
 
 var tasks_arr
+var task_obj_stack = []
 
 var tasks_arr = JSON.parse(localStorage.getItem("tasks"))
 if(tasks_arr == null){
@@ -101,10 +102,17 @@ class task{
 
         id_tick += 1
         input.value = ""
+        task_obj_stack.push(this)
     }
 }
 
 for(let i = 0; i < tasks_arr.length; i++){
     console.log(tasks_arr[i])
     new task(tasks_arr[i].task_name,tasks_arr[i].task_box)
+}
+
+var clear_all = function(){
+    for(let i = 0; i < task_obj_stack.length; i++){
+        task_obj_stack[i].del.onclick()
+    }
 }
