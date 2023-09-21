@@ -44,7 +44,7 @@ div {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.checkbox {
+#do .checkbox {
     -webkit-appearance: none;
     display: inline-block;
     vertical-align: middle;
@@ -58,9 +58,11 @@ div {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.checkbox:checked {
+#done .checkbox {
     -webkit-appearance: none;
-    background-color: rgb(0, 255, 89);
+    display: inline-block;
+    vertical-align: middle;
+    background-color: rgb(0, 255, 0);
     border: 1px solid white;
     color: white;
     border-radius: 10px;
