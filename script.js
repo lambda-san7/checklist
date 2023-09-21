@@ -37,6 +37,7 @@ class task{
         this.check.onclick = () => {
             if(this.box == "do"){
                 done.appendChild(this.check)
+                done.appendChild(this.del)
                 done.appendChild(this.txt)
                 done.appendChild(this.br)
                 this.box = "done"
@@ -52,6 +53,7 @@ class task{
             }
             if(this.box == "done"){
                 tasks.appendChild(this.check)
+                tasks.appendChild(this.del)
                 tasks.appendChild(this.txt)
                 tasks.appendChild(this.br)
                 this.box = "do"
@@ -71,11 +73,28 @@ class task{
         this.txt.value = name
         this.txt.classList.add("editable")
         this.txt.id = `${this.id}txt`
+
+        this.del = document.createElement("button")
+        this.del.classList.add("delete")
+        this.del.onclick = () => {
+            document.getElementById(this.box).removeChild(this.check);
+            document.getElementById(this.box).removeChild(this.del);
+            document.getElementById(this.box).removeChild(this.txt);
+            document.getElementById(this.box).removeChild(this.br);
+            for(let i = 0; i < tasks_arr.length; i++){
+                if(tasks_arr[i].task_name == this.name){
+                    tasks_arr.pop(tasks_arr[i])
+                }
+            }
+            var JSON_arr = JSON.stringify(tasks_arr);
+            localStorage.setItem("tasks", JSON_arr);
+        }
     
         this.br = document.createElement("br")
         this.br.id = this.id
             
         document.getElementById(this.box).appendChild(this.check);
+        document.getElementById(this.box).appendChild(this.del);
         document.getElementById(this.box).appendChild(this.txt);
         document.getElementById(this.box).appendChild(this.br);
 
