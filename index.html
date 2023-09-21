@@ -3,13 +3,12 @@
         <title>
             Checklist App
         </title>
-        
         <link rel="stylesheet" href="style.css"></link>
     </head>
     <body>
         <div class="bar">
             <input id="input" type="text" class="input">
-            <button onclick="task()">add to Checklist</button>
+            <button onclick="new_task(document.getElementById('input').value,'do')">add to Checklist</button>
         </div>
         <div id="tasks">
             <h3>
