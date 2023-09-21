@@ -4,6 +4,8 @@ const done = document.getElementById("done")
 
 id_tick = 1
 
+var tasks_arr
+
 var tasks_arr = JSON.parse(localStorage.getItem("tasks"))
 if(tasks_arr == null){
     var tasks_arr = []
@@ -11,6 +13,7 @@ if(tasks_arr == null){
 
 var new_task = function(name,box){
     new task(name,box)
+    console.log(box)
     tasks_arr.push(
         {
             task_name: name,
@@ -25,6 +28,7 @@ class task{
     constructor(name,box){
         this.id = id_tick
         this.box = box
+        this.name = name
 
         this.check = document.createElement("input")
         this.check.type = "checkbox"
@@ -39,9 +43,11 @@ class task{
                 for(let i = 0; i < tasks_arr.length; i++){
                     if(tasks_arr[i].task_name == this.name){
                         tasks_arr[i].task_box = "done"
-                        
+                        console.log(tasks_arr[i].task_box)
                     }
                 }
+                var JSON_arr = JSON.stringify(tasks_arr);
+                localStorage.setItem("tasks", JSON_arr);
                 return
             }
             if(this.box == "done"){
@@ -52,12 +58,13 @@ class task{
                 for(let i = 0; i < tasks_arr.length; i++){
                     if(tasks_arr[i].task_name == this.name){
                         tasks_arr[i].task_box = "do"
+                        console.log(tasks_arr[i].task_box)
                     }
                 }
+                var JSON_arr = JSON.stringify(tasks_arr);
+                localStorage.setItem("tasks", JSON_arr);
                 return
             }
-            var JSON_arr = JSON.stringify(tasks_arr);
-            localStorage.setItem("tasks", JSON_arr);
         }
 
         this.txt = document.createElement("input")
@@ -68,9 +75,9 @@ class task{
         this.br = document.createElement("br")
         this.br.id = this.id
             
-        document.getElementById().appendChild(this.check);
-        document.getElementById().appendChild(this.txt);
-        document.getElementById().appendChild(this.br);
+        document.getElementById(this.box).appendChild(this.check);
+        document.getElementById(this.box).appendChild(this.txt);
+        document.getElementById(this.box).appendChild(this.br);
 
         id_tick += 1
         input.value = ""
