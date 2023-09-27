@@ -4,25 +4,29 @@ const done = document.getElementById("done")
 
 id_tick = 1
 
-var tasks_arr
-var task_obj_stack = []
+var tasks_arr = []
 
-var tasks_arr = JSON.parse(localStorage.getItem("tasks"))
-if(tasks_arr == null){
+var JSON_parse = JSON.parse(localStorage.getItem("tasks"))
+if(JSON_parse == null){
+    var JSON_parse = []
     var tasks_arr = []
 }
 
-var new_task = function(name,box){
-    new task(name,box)
-    console.log(box)
-    tasks_arr.push(
-        {
-            task_name: name,
-            task_box: box,
-        }
-    )
-    var JSON_arr = JSON.stringify(tasks_arr);
+var save = function(){
+    console.log("saving...")
+    obj_arr = []
+    for(let i = 0; i < tasks_arr.length; i++){
+        obj_arr.push(
+            {
+                name: tasks_arr[i].name,
+                box: tasks_arr[i].box,
+            }
+        )
+    }
+    var JSON_arr = JSON.stringify(obj_arr);
     localStorage.setItem("tasks", JSON_arr);
+    console.log("saved!")
+    console.log(localStorage.getItem("tasks"))
 }
 
 class task{
@@ -30,7 +34,8 @@ class task{
         this.id = id_tick
         this.box = box
         this.name = name
-
+        
+        console.log(box)
         this.check = document.createElement("input")
         this.check.type = "checkbox"
         this.check.classList.add("checkbox")
@@ -42,14 +47,7 @@ class task{
                 done.appendChild(this.txt)
                 done.appendChild(this.br)
                 this.box = "done"
-                for(let i = 0; i < tasks_arr.length; i++){
-                    if(tasks_arr[i].task_name == this.name){
-                        tasks_arr[i].task_box = "done"
-                        console.log(tasks_arr[i].task_box)
-                    }
-                }
-                var JSON_arr = JSON.stringify(tasks_arr);
-                localStorage.setItem("tasks", JSON_arr);
+                save()
                 return
             }
             if(this.box == "done"){
@@ -58,14 +56,7 @@ class task{
                 tasks.appendChild(this.txt)
                 tasks.appendChild(this.br)
                 this.box = "do"
-                for(let i = 0; i < tasks_arr.length; i++){
-                    if(tasks_arr[i].task_name == this.name){
-                        tasks_arr[i].task_box = "do"
-                        console.log(tasks_arr[i].task_box)
-                    }
-                }
-                var JSON_arr = JSON.stringify(tasks_arr);
-                localStorage.setItem("tasks", JSON_arr);
+                save()
                 return
             }
         }
@@ -79,22 +70,17 @@ class task{
         this.del.classList.add("delete")
         this.del.innerHTML = "X"
         this.del.onclick = () => {
+            tasks_arr.splice(tasks_arr.indexOf(this), 1)
             document.getElementById(this.box).removeChild(this.check);
             document.getElementById(this.box).removeChild(this.del);
             document.getElementById(this.box).removeChild(this.txt);
             document.getElementById(this.box).removeChild(this.br);
-            for(let i = 0; i < tasks_arr.length; i++){
-                if(tasks_arr[i].task_name == this.name){
-                    tasks_arr.pop(tasks_arr[i])
-                }
-            }
-            var JSON_arr = JSON.stringify(tasks_arr);
-            localStorage.setItem("tasks", JSON_arr);
+            save()
         }
     
         this.br = document.createElement("br")
         this.br.id = this.id
-            
+
         document.getElementById(this.box).appendChild(this.check);
         document.getElementById(this.box).appendChild(this.del);
         document.getElementById(this.box).appendChild(this.txt);
@@ -102,23 +88,26 @@ class task{
 
         id_tick += 1
         input.value = ""
-        task_obj_stack.push(this)
+        tasks_arr.push(this)
+        save()
     }
 }
 
-for(let i = 0; i < tasks_arr.length; i++){
-    console.log(tasks_arr[i])
-    new task(tasks_arr[i].task_name,tasks_arr[i].task_box)
+for(let i = 0; i < JSON_parse.length; i++){
+    new_task = new task(JSON_parse[i].name, JSON_parse[i].box)
 }
 
 var clear_all = function(){
     switch(confirm("are you sure you want to delete all tasks?")){
         case true:
-            for(let i = 0; i < task_obj_stack.length; i++){
-                task_obj_stack[i].del.onclick()
+            console.log(`array is ${tasks_arr.length} long`)
+            for(let i = 0; i < tasks_arr.length + 2; i++){
+                console.log(i,tasks_arr[0])
+                tasks_arr[0].del.onclick()
             }
+            save()
         default:
             console.log("cancelled delete all")
-    }
-    
+            save()
+    } 
 }
